@@ -17,7 +17,7 @@ public enum Suit {
   },
   SPADES;
 
-  private static final char[] symbols = {'\u2663', '\u2262', '\u2261', '\u2260'};
+  private static final char[] symbols = {'\u2663', '\u2662', '\u2661', '\u2660'};
 
   public char getSymbol() {
     return symbols[ordinal()];
@@ -26,7 +26,9 @@ public enum Suit {
   public Color getColor() {
     return Color.BLACK;
   }
+
   public enum Color {
     BLACK, RED
   }
+
 }

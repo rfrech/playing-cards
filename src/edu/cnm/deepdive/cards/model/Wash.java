@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.stream.Stream;
 
-public class Wash implements Iterable<Card> {
+public abstract class Wash implements Iterable<Card> {
 
   private final List<Card> cards;
 
-  public Wash() {
+  protected Wash() {
     cards = new ArrayList<>();
   }
 
@@ -18,12 +20,16 @@ public class Wash implements Iterable<Card> {
     cards.add(card);
   }
 
-  public Card draw(Card card) {
-    return cards.remove(0);
+  public Card draw() {
+    try {
+      return cards.remove(0);
+    } catch (IndexOutOfBoundsException e) {
+      throw new NoSuchElementException();
+    }
   }
 
   public void sort() {
-    Collections.sort(cards);
+    cards.sort(null);
   }
 
   public void shuffle(Random rng) {
@@ -44,7 +50,16 @@ public class Wash implements Iterable<Card> {
     return cards.size();
   }
 
+  public boolean isEmpty() {
+    return cards.isEmpty();
+  }
+
+  public Stream<Card> stream() {
+    return cards.stream();
+
+  }
   protected List<Card> getCards() {
     return cards;
   }
+
 }
